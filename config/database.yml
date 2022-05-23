@@ -1,0 +1,15 @@
+default: &default
+  adapter: postgresql
+  encoding: unicode
+  host: db
+  username: postgres
+  password: password
+  pool: 5
+
+test:
+  <<: *default
+  database: twitterBot_test
+
+development:
+  <<: *default
+  database: twitterBot_development
