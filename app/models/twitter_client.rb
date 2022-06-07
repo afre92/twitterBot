@@ -1,16 +1,17 @@
 require 'tweetkit'
+require 'httparty'
 
 class TwitterClient
  
 	def initialize
- 		@client = Tweetkit::Client.new(bearer_token: 'YOUR_BEARER_TOKEN_HERE',
- 															consumer_key: 'YOUR_CONSUMER_KEY_HERE',
- 															consumer_secret: 'YOUR_CONSUMER_SECRET_HERE')
+ 		@client = Tweetkit::Client.new(bearer_token: Rails.application.credentials.twitter.bearer_token,
+ 															api_key: Rails.application.credentials.twitter.api_key,
+ 															api_secret_key: Rails.application.credentials.twitter.api_secret_key)
 	end
 
 
 	def check_price
-		
+		response = HTTParty.get("https://data.messari.io/api/v1/assets/one?x-messari-api-key=#{Rails.application.credentials.messari.api_key}")
 	end
 
 end
